@@ -1,7 +1,9 @@
+export const dynamic = "force-dynamic"; // ✅ pour éviter l'erreur Vercel "supabaseUrl is required"
 'use client'
 
 import { useState } from 'react'
-import { supabase } from '@/lib/supabaseClient' // ✅ on importe le client Supabase correctement
+import { supabase } from '@/lib/supabaseClient'
+
 
 export default function AddUserPage() {
   const [form, setForm] = useState({
