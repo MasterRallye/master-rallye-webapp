@@ -35,6 +35,8 @@ export default function AddUserPage() {
         phone_number: form.phone,
       },
     ])
+    console.log('Nouvel utilisateur ajouté :', data) // ✅ placé ici, après l'insertion
+  
     if (error) {
       setMessage(`❌ Erreur : ${error.message}`)
     } else {
