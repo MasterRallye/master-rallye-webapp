@@ -1,10 +1,9 @@
-'use client' // ← OBLIGATOIRE en premier
+'use client' // ← Doit absolument être la toute première ligne du fichier
 
-export const dynamic = "force-dynamic" // ← Ensuite cette ligne
+export const dynamic = "force-dynamic" // ← Peut venir juste après
 
 import { useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
-
 
 
 export default function AddUserPage() {
