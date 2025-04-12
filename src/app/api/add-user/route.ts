@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabaseClient'
+import { supabaseAdmin } from '@/lib/supabaseAdmin'
 
 console.log('🌐 SUPABASE_URL =', process.env.NEXT_PUBLIC_SUPABASE_URL)
 console.log('🔑 SUPABASE_KEY =', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
@@ -8,7 +8,7 @@ export async function POST(req: Request) {
   try {
     const form = await req.json()
 
-    const { data, error } = await supabase.from('users').insert([
+    const { data, error } = await supabaseAdmin.from('users').insert([
       {
         first_name: form.first_name,
         last_name: form.last_name,
@@ -17,10 +17,10 @@ export async function POST(req: Request) {
       },
     ])
 
-    console.log('✅ Supabase insert data:', data)
+    console.log('✅ SupabaseAdmin insert data:', data)
 
     if (error) {
-      console.error('❌ Supabase error:', error)
+      console.error('❌ SupabaseAdmin error:', error)
       return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
