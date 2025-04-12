@@ -5,8 +5,8 @@ export const dynamic = "force-dynamic" // ← Peut venir juste après
 import { useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 
-console.log('SUPABASE_URL =', process.env.NEXT_PUBLIC_SUPABASE_URL)
-console.log('SUPABASE_KEY =', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
+// console.log('SUPABASE_URL =', process.env.NEXT_PUBLIC_SUPABASE_URL)
+// console.log('SUPABASE_KEY =', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
 
 export default function AddUserPage() {
   const [form, setForm] = useState({
@@ -23,23 +23,30 @@ export default function AddUserPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const { data, error } = await supabase.from('users').insert([
-      {
-        first_name: form.first_name,
-        last_name: form.last_name,
-        email: form.email,
-        phone_number: form.phone,
-      },
-    ])
-    console.log('Nouvel utilisateur ajouté :', data) // ✅ debug dans la console
-
-    if (error) {
-      setMessage(`❌ Erreur : ${error.message}`)
-    } else {
-      setMessage('✅ Utilisateur ajouté avec succès !')
-      setForm({ first_name: '', last_name: '', email: '', phone: '' })
+  
+    try {
+      const res = await fetch('/api/add-user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      })
+  
+      const result = await res.json()
+      console.log('✅ Résultat :', result)
+  
+      if (!res.ok) {
+        setMessage('❌ Erreur : ' + result.error)
+      } else {
+        setMessage('✅ Utilisateur ajouté avec succès')
+      }
+    } catch (err) {
+      console.error(err)
+      setMessage('❌ Erreur : ' + err)
     }
   }
+  
 
   return (
     <div style={{ padding: '2rem' }}>
