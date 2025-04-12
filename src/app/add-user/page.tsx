@@ -1,16 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { createClient } from '@supabase/supabase-js'
-
-// ✅ On affiche les variables d'environnement dans la console navigateur
-console.log('SUPABASE_URL =', process.env.NEXT_PUBLIC_SUPABASE_URL)
-console.log('SUPABASE_KEY =', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY)
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+import { supabase } from '@/lib/supabaseClient' // ✅ on importe le client Supabase correctement
 
 export default function AddUserPage() {
   const [form, setForm] = useState({
@@ -35,8 +26,8 @@ export default function AddUserPage() {
         phone_number: form.phone,
       },
     ])
-    console.log('Nouvel utilisateur ajouté :', data) // ✅ placé ici, après l'insertion
-  
+    console.log('Nouvel utilisateur ajouté :', data) // ✅ debug dans la console
+
     if (error) {
       setMessage(`❌ Erreur : ${error.message}`)
     } else {
