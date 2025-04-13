@@ -1,4 +1,3 @@
-// lib/supabase.ts
 import { createClient } from '@supabase/supabase-js'
 
 export type Json = string | number | boolean | null | { [key: string]: Json } | Json[]
@@ -28,9 +27,9 @@ export type Database = {
         Update: Partial<Database['public']['Tables']['users']['Insert']>
       }
     }
-    Views: {}
-    Functions: {}
-    Enums: {}
+    Views: Record<string, never>
+    Functions: Record<string, never>
+    Enums: Record<string, never>
   }
 }
 
