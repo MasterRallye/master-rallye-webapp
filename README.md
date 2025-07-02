@@ -14,6 +14,14 @@ pnpm dev
 bun dev
 ```
 
+Before starting the server, create a `.env.local` file with your Supabase
+credentials. You can copy `.env.example` and fill in the values:
+
+```bash
+cp .env.example .env.local
+# then edit .env.local with your project keys
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
